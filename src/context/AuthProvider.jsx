@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
-      fetch(`http://localhost:3100/user?email=${currentUser?.email}`, {
+      fetch(`https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`, {
         method: "GET",
       })
         .then((res) => res.json())

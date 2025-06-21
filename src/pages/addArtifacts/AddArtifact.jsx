@@ -14,9 +14,9 @@ const AddArtifact = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // fetch("http://localhost:3100/").then((res) => res.json());
+    // fetch("https://assignment-011-server-side.vercel.app/").then((res) => res.json());
     axios
-      .post("http://localhost:3100/artifact", data)
+      .post("https://assignment-011-server-side.vercel.app/artifact", data)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

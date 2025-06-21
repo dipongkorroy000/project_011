@@ -28,7 +28,7 @@ const UpdateCart = () => {
     console.log(data);
 
     axios
-      .put(`http://localhost:3100/artifact/${_id}`, data)
+      .put(`https://assignment-011-server-side.vercel.app/artifact/${_id}`, data)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };

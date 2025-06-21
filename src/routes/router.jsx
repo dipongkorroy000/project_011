@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: "/profile/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/user?email=${params.email}`),
+          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`),
         element: (
           <PrivateRoute>
             <Profile></Profile>
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       {
         path: "/addArtifact/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/user?email=${params.email}`),
+          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`),
         element: (
           <PrivateRoute>
             <AddArtifact></AddArtifact>
@@ -73,19 +73,19 @@ const router = createBrowserRouter([
         ),
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/artifact/${params.id}`),
+          fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
         element: <Details></Details>,
       },
 
       {
         path: "/liked",
-        loader: () => fetch("http://localhost:3100/artifact"),
+        loader: () => fetch("https://assignment-011-server-side.vercel.app/artifact"),
         element: <Liked></Liked>,
       },
       {
         path: "/updateCart/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/artifact/${params.id}`),
+          fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateCart></UpdateCart>
