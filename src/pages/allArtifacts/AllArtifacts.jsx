@@ -17,7 +17,7 @@ const AllArtifacts = () => {
   return (
     <section className="my-10 w-10/12 mx-auto">
       <div></div>
-      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
+      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5 border-gray-700 border p-5">
         {artifacts?.map((n) => (
           <Artifact n={n} key={n._id}></Artifact>
         ))}

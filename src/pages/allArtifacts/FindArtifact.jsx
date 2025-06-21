@@ -5,7 +5,7 @@ import { saveId } from "../../saveLocalStorage/saveIdLocalStorage";
 import Swal from "sweetalert2";
 
 const Artifact = ({ n }) => {
-  const { _id, name, image, short_description, artifact_name, discovered_by } =
+  const { _id, name, image, discovered_by } =
     n;
 
   const addLikeTask = (id) => {
@@ -20,9 +20,9 @@ const Artifact = ({ n }) => {
   };
 
   return (
-    <div className="card card-side bg-base-100 shadow-sm border">
+    <div className="card card-side bg-base-100 shadow-sm border border-gray-500">
       <figure>
-        <img src={image} alt="Movie" />
+        <img className="h-28" src={image} alt="Movie" />
       </figure>
       <div className="card-body">
         <div className="flex justify-between">
@@ -34,8 +34,6 @@ const Artifact = ({ n }) => {
             color={"white"}
           />
         </div>
-        <p>{short_description}</p>
-        <p>{artifact_name}</p>
         <p>{discovered_by}</p>
         <div className="card-actions justify-end">
           <Link to={`/details/${n._id}`} className="btn btn-primary">
