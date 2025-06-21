@@ -6,6 +6,7 @@ import AllPhoto from "./AllPhoto";
 const Home = () => {
   return (
     <>
+      {/* banner  */}
       <section
         className="hero h-96"
         style={{
@@ -26,6 +27,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* scroll text */}
       <section className="w-full bg-blue-400 h-10">
         <div className="App text-center font-bold text-2xl align-middle text-emerald-900">
           <Typewriter
@@ -40,13 +42,14 @@ const Home = () => {
         </div>
       </section>
 
+      {/* all History */}
       <section>
         <div className="hero bg-base-200 min-h-fit">
           <div className="hero-content text-center">
             <h1 className="text-5xl font-bold">All History</h1>
           </div>
         </div>
-        <div className="w-10/12 mx-auto">
+        <div className="w-10/12 mx-auto mb-10 mt-5">
           <AllPhoto></AllPhoto>
         </div>
       </section>

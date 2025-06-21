@@ -24,9 +24,12 @@ const AllPhoto = () => {
     setMoreBtn(true);
   };
 
-    // cart task not complete 
+  const handlePrevious = () => {};
+
+  const handleNext = () => {};
+
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <div className="grid grid-cols-4 max-2xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-8">
         {countPhoto.map((n, index) => (
           <Cart n={n} key={index}></Cart>
@@ -40,8 +43,15 @@ const AllPhoto = () => {
           See More
         </button>
         <div className={`join grid grid-cols-2 ${moreBtn ? "" : "hidden"}`}>
-          <button className="join-item btn btn-outline">Previous page</button>
-          <button className="join-item btn btn-outline">Next</button>
+          <button
+            onClick={handlePrevious}
+            className="join-item btn btn-outline"
+          >
+            Previous page
+          </button>
+          <button onClick={handleNext} className="join-item btn btn-outline">
+            Next
+          </button>
         </div>
       </div>
     </div>

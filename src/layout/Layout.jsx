@@ -4,16 +4,17 @@ import { Outlet } from "react-router";
 import Footer from "../components/Footer";
 
 const Layout = () => {
-
   return (
     <>
       <header>
         <Navbar></Navbar>
       </header>
-      <Outlet></Outlet>
-      {/* <main className="min-h-[calc(100vh-334px)]">
-      </main> */}
-      <footer>{/* <Footer></Footer> */}</footer>
+      <main className="min-h-[calc(100vh-334px)]">
+        <Outlet></Outlet>
+      </main>
+      <footer>
+        <Footer></Footer>
+      </footer>
     </>
   );
 };
