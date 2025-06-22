@@ -72,7 +72,7 @@ const Navbar = () => {
             typeof="submit"
             name="search"
             type="text"
-            placeholder="Search Artifacts Name"
+            placeholder="Type Name & press Enter"
             className="input input-bordered w-24 md:w-auto"
           />
         </form>

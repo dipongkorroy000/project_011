@@ -45,7 +45,7 @@ const AddArtifact = () => {
                 name="name"
                 type="text"
                 className="input"
-                placeholder="Artifact Name"
+                placeholder="Name"
               />
 
               {/* Image */}
@@ -131,7 +131,7 @@ const AddArtifact = () => {
                 name="artifact_name"
                 type="text"
                 className="input"
-                placeholder="Artifact adder name"
+                placeholder="Artifact Name"
                 readOnly
               />
 

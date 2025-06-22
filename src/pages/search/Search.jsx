@@ -8,19 +8,22 @@ const Search = () => {
   const data = useLoaderData();
 
   const artifact = data.filter(
-    (n) => n.artifact_name.toLowerCase() === searchText.toLowerCase()
+    (n) => n.name.toLowerCase() === searchText.toLowerCase()
   );
 
   return (
     <section className="my-10 w-10/12 mx-auto">
-      <div className="text-center font-bold text-2xl">
-        {searchText === "" && <h2 className="text-yellow-300">Please type Artifacts Name</h2>}
+      <h2 className="text-center text-3xl mb-3">Searching Task</h2>
+      <div className="text-center font-semibold text-2xl">
+        {searchText === "" && (
+          <h2 className="text-yellow-300">Please type Name</h2>
+        )}
       </div>
       <div>
         {searchText && (
           <>
             {artifact.map((n) => (
-              <FindArtifact n={n}></FindArtifact>
+              <FindArtifact key={n._id} n={n}></FindArtifact>
             ))}
           </>
         )}

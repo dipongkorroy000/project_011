@@ -5,6 +5,7 @@ const Details = () => {
   const task = useLoaderData();
 
   const {
+    name,
     artifact_email,
     artifact_name,
     discover_at,
@@ -21,6 +22,7 @@ const Details = () => {
         <img src={image} alt="Shoes" />
       </figure>
       <div className="card-body">
+        <h2>{name}</h2>
         <h2 className="card-title text-red-400">
           {artifact_name}
           <div className="badge badge-secondary">NEW</div>
