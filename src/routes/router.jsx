@@ -84,7 +84,11 @@ const router = createBrowserRouter([
           fetch(
             `https://assignment-011-server-side.vercel.app/artifact/${params.id}`
           ),
-        element: <Details></Details>,
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
       },
 
       {

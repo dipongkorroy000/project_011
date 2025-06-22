@@ -32,7 +32,7 @@ const FindArtifact = ({ n }) => {
             onClick={() => addLikeTask(_id)}
             className="cursor-pointer"
             size={25}
-            color={"white"}
+            color={"blue"}
           />
         </div>
         <p>{discovered_by}</p>
