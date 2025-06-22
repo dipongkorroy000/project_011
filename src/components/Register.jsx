@@ -29,7 +29,10 @@ const Register = () => {
         .then((res) => {
           if (res.user.metadata) {
             axios
-              .post("http://localhost:3000/user", newUserData)
+              .post(
+                "https://assignment-011-server-side.vercel.app/user",
+                newUserData
+              )
               .then((res) => {
                 if (res.data.insertedId) {
                   Swal.fire({
@@ -39,6 +42,7 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500,
                   });
+                  navigate("/");
                 }
               })
               .catch((error) => console.log(error));

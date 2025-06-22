@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
@@ -28,13 +29,20 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const userDelete = () => {
+    return deleteUser(auth.currentUser);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
-      fetch(`https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`, {
-        method: "GET",
-      })
+      fetch(
+        `https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`,
+        {
+          method: "GET",
+        }
+      )
         .then((res) => res.json())
         .then((data) => setUserData(data));
     });
@@ -42,8 +50,15 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-
-  const authInfo = { signIn, signUp, user, logoutUser, loading, userData };
+  const authInfo = {
+    signIn,
+    signUp,
+    user,
+    logoutUser,
+    loading,
+    userData,
+    userDelete,
+  };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
 

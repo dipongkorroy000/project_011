@@ -12,7 +12,14 @@ const User = ({ logoutUser }) => {
         className="btn btn-ghost btn-circle avatar"
       >
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src={userData.photo} />
+          <img
+            alt="User PIC"
+            src={`${
+              userData.photo
+                ? userData.photo
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OS42s43UtRV9IOoV6jGh_ptfBcKwVoo2eg&s"
+            }`}
+          />
         </div>
       </div>
       <ul

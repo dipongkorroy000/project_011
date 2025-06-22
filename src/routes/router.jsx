@@ -12,11 +12,13 @@ import AllArtifacts from "../pages/allArtifacts/AllArtifacts";
 import Details from "../pages/allArtifacts/Details";
 import Liked from "../pages/likedArtifacts/Liked";
 import UpdateCart from "../pages/myArtifacts/UpdateCart";
+import Error from "../components/error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
       {
         path: "/profile/:email",
         loader: ({ params }) =>
-          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`),
+          fetch(
+            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`
+          ),
         element: (
           <PrivateRoute>
             <Profile></Profile>
@@ -43,7 +47,9 @@ const router = createBrowserRouter([
       {
         path: "/addArtifact/:email",
         loader: ({ params }) =>
-          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`),
+          fetch(
+            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`
+          ),
         element: (
           <PrivateRoute>
             <AddArtifact></AddArtifact>
@@ -73,19 +79,24 @@ const router = createBrowserRouter([
         ),
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
+          fetch(
+            `https://assignment-011-server-side.vercel.app/artifact/${params.id}`
+          ),
         element: <Details></Details>,
       },
 
       {
         path: "/liked",
-        loader: () => fetch("https://assignment-011-server-side.vercel.app/artifact"),
+        loader: () =>
+          fetch("https://assignment-011-server-side.vercel.app/artifact"),
         element: <Liked></Liked>,
       },
       {
         path: "/updateCart/:id",
         loader: ({ params }) =>
-          fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
+          fetch(
+            `https://assignment-011-server-side.vercel.app/artifact/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <UpdateCart></UpdateCart>
