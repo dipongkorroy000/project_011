@@ -31,6 +31,7 @@ const Login = () => {
             name="email"
             className="input"
             placeholder="Email"
+            required
           />
 
           <label className="label">Password</label>
@@ -39,6 +40,9 @@ const Login = () => {
             name="password"
             className="input"
             placeholder="Password"
+            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
+            title="The password must contain at least one lowercase letter, one uppercase letter, and be at least 6 characters long."
+            required
           />
 
           <div>

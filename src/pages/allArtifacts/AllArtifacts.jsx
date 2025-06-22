@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import Artifact from "./FindArtifact";
+import FindArtifact from "./FindArtifact";
 // import { getIds } from "../../saveLocalStorage/saveIdLocalStorage";
 
 const AllArtifacts = () => {
@@ -23,7 +23,7 @@ const AllArtifacts = () => {
       <div></div>
       <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5 border-gray-700 border p-5">
         {artifacts?.map((n) => (
-          <Artifact n={n} key={n._id}></Artifact>
+          <FindArtifact n={n} key={n._id}></FindArtifact>
         ))}
       </div>
     </section>

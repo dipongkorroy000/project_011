@@ -1,10 +1,11 @@
 import React, { Suspense, useContext, useEffect, useState } from "react";
 import User from "./log/User";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
-  const { user, logoutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, logoutUser, setSearchText } = useContext(AuthContext);
 
   const [theme, setTheme] = useState(false);
 
@@ -15,6 +16,13 @@ const Navbar = () => {
       document.querySelector("html").setAttribute("data-theme", "dark");
     }
   }, [theme]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    navigate("/search");
+    setSearchText(search);
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -57,12 +65,18 @@ const Navbar = () => {
           Historical Artifacts
         </a>
       </div>
+
       <div className="flex gap-2 items-center">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-24 md:w-auto"
-        />
+        <form onSubmit={handleSearch} action="">
+          <input
+            typeof="submit"
+            name="search"
+            type="text"
+            placeholder="Search Artifacts Name"
+            className="input input-bordered w-24 md:w-auto"
+          />
+        </form>
+
         {!user ? (
           <NavLink to="/login" className="font-semibold btn-ghost btn">
             Login

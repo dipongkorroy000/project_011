@@ -19,8 +19,6 @@ const Register = () => {
     const { email, password, ...userData } = data;
     const newUserData = { ...userData, email };
 
-    console.log(newUserData);
-
     if (password.length < 6) {
       return setPassError("pass must be minimum 6 character");
     } else {
@@ -89,6 +87,8 @@ const Register = () => {
             name="password"
             className="input"
             placeholder="Password"
+            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
+            title="The password must contain at least one lowercase letter, one uppercase letter, and be at least 6 characters long."
             required
           />
 

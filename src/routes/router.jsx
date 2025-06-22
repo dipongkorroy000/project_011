@@ -13,6 +13,7 @@ import Details from "../pages/allArtifacts/Details";
 import Liked from "../pages/likedArtifacts/Liked";
 import UpdateCart from "../pages/myArtifacts/UpdateCart";
 import Error from "../components/error/Error";
+import Search from "../pages/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,12 @@ const router = createBrowserRouter([
             <UpdateCart></UpdateCart>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/search",
+        loader: () =>
+          fetch("https://assignment-011-server-side.vercel.app/artifact"),
+        element: <Search></Search>,
       },
     ],
   },

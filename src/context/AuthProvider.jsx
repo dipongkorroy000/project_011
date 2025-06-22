@@ -12,6 +12,7 @@ import {
 import { auth } from "../firebase/firebase.init";
 
 const AuthProvider = ({ children }) => {
+  const [searchText, setSearchText] = useState("");
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -66,6 +67,8 @@ const AuthProvider = ({ children }) => {
     userData,
     userDelete,
     googleLogin,
+    searchText,
+    setSearchText,
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };

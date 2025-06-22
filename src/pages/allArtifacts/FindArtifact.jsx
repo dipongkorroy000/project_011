@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiSolidDislike } from "react-icons/bi";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { saveId } from "../../saveLocalStorage/saveIdLocalStorage";
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../../context/AuthContext";
 
-const Artifact = ({ n }) => {
+const FindArtifact = ({ n }) => {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const { _id, name, image, discovered_by } = n;
 
   const addLikeTask = (id) => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
     saveId(id);
     toast("Add this task your favorite page!");
   };
@@ -40,4 +47,4 @@ const Artifact = ({ n }) => {
   );
 };
 
-export default Artifact;
+export default FindArtifact;
