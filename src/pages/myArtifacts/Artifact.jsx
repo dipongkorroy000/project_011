@@ -1,18 +1,36 @@
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const Artifact = ({ n }) => {
   const { _id, name, image, short_description, artifact_name, discovered_by } =
     n;
 
   const handleDelete = (id) => {
-    axios
-      .delete(
-        `https://assignment-011-server-side.vercel.app/artifact/delete/${id}`,
-        id
-      )
-      .then((res) => console.log(res));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://assignment-011-server-side.vercel.app/artifact/delete/${id}`,
+            id
+          )
+          .then((res) => console.log(res));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
