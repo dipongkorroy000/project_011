@@ -14,6 +14,7 @@ import Liked from "../pages/likedArtifacts/Liked";
 import UpdateCart from "../pages/myArtifacts/UpdateCart";
 import Error from "../components/error/Error";
 import Search from "../pages/Search/Search";
+import UpdateProfile from "../pages/profile/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,16 @@ const router = createBrowserRouter([
         loader: () =>
           fetch("https://assignment-011-server-side.vercel.app/artifact"),
         element: <Search></Search>,
+      },
+      {
+        path: "/updateProfile",
+        loader: () =>
+          fetch("https://assignment-011-server-side.vercel.app/user"),
+        element: (
+          <PrivateRoute>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRoute>
+        ),
       },
     ],
   },

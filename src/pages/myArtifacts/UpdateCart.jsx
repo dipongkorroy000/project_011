@@ -25,11 +25,12 @@ const UpdateCart = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
-
     axios
-      .put(`https://assignment-011-server-side.vercel.app/artifact/${_id}`, data)
-      .then((response) => console.log(response.data))
+      .put(
+        `https://assignment-011-server-side.vercel.app/artifact/${_id}`,
+        data
+      )
+      .then(() => {})
       .catch((error) => console.log(error));
   };
 

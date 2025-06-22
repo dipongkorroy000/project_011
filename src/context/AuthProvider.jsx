@@ -51,6 +51,7 @@ const AuthProvider = ({ children }) => {
           method: "GET",
         }
       )
+        .then((res) => res.json())
         .then((data) => setUserData(data));
     });
 

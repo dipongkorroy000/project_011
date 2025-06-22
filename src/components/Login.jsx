@@ -11,9 +11,12 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signIn(email, password).then(() => {
-      navigate("/");
-    });
+    signIn(email, password)
+      .then((res) => {
+        navigate("/");
+        console.log(res);
+      })
+      .catch((error) => console.log(error));
   };
 
   const googleLoginUser = () => {
