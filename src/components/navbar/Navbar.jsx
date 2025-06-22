@@ -1,10 +1,20 @@
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import User from "./log/User";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
+
+  const [theme, setTheme] = useState(false);
+
+  useEffect(() => {
+    if (theme) {
+      document.querySelector("html").setAttribute("data-theme", "light");
+    } else {
+      document.querySelector("html").setAttribute("data-theme", "dark");
+    }
+  }, [theme]);
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -43,7 +53,9 @@ const Navbar = () => {
       </div>
 
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Historical Artifacts</a>
+        <a onClick={() => setTheme(!theme)} className="btn btn-ghost text-xl">
+          Historical Artifacts
+        </a>
       </div>
       <div className="flex gap-2 items-center">
         <input
