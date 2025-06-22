@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Artifact from "./FindArtifact";
+// import { getIds } from "../../saveLocalStorage/saveIdLocalStorage";
 
 const AllArtifacts = () => {
-  const [artifacts, setArtifacts] = useState();
+  const [artifacts, setArtifacts] = useState([]);
   const { user } = useContext(AuthContext);
+
+  // const ids = getIds();
 
   useEffect(() => {
     fetch("https://assignment-011-server-side.vercel.app/artifact")
       .then((res) => res.json())
       .then((data) => {
+
         setArtifacts(data);
       });
   }, [user]);

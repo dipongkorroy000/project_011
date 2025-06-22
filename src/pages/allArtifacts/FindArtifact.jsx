@@ -3,20 +3,14 @@ import { BiSolidDislike } from "react-icons/bi";
 import { Link } from "react-router";
 import { saveId } from "../../saveLocalStorage/saveIdLocalStorage";
 import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
 
 const Artifact = ({ n }) => {
-  const { _id, name, image, discovered_by } =
-    n;
+  const { _id, name, image, discovered_by } = n;
 
   const addLikeTask = (id) => {
     saveId(id);
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    toast("Add this task your favorite page!");
   };
 
   return (
@@ -41,6 +35,7 @@ const Artifact = ({ n }) => {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
