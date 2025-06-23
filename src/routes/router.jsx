@@ -38,7 +38,10 @@ const router = createBrowserRouter([
         path: "/profile/:email",
         loader: ({ params }) =>
           fetch(
-            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`
+            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`,
+            {
+              credentials: "include",
+            }
           ),
         element: (
           <PrivateRoute>
@@ -50,7 +53,10 @@ const router = createBrowserRouter([
         path: "/addArtifact/:email",
         loader: ({ params }) =>
           fetch(
-            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`
+            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`,
+            {
+              credentials: "include",
+            }
           ),
         element: (
           <PrivateRoute>
@@ -118,7 +124,9 @@ const router = createBrowserRouter([
       {
         path: "/updateProfile",
         loader: () =>
-          fetch("https://assignment-011-server-side.vercel.app/user"),
+          fetch("https://assignment-011-server-side.vercel.app/user", {
+            credentials: 'include',
+          }),
         element: (
           <PrivateRoute>
             <UpdateProfile></UpdateProfile>

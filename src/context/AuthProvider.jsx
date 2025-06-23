@@ -10,6 +10,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [searchText, setSearchText] = useState("");
@@ -45,15 +46,26 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setLoading(false);
       setUser(currentUser);
-      if (currentUser) {
-        fetch(
-          `https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`,
-          {
-            method: "GET",
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => setUserData(data));
+
+      if (currentUser?.email) {
+        axios
+          .post(
+            "https://assignment-011-server-side.vercel.app/jwt",
+            { email: currentUser.email },
+            {
+              withCredentials: true,
+            }
+          )
+          .then(() => {
+            axios
+              .get(
+                `https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`,
+                {
+                  withCredentials: true,
+                }
+              )
+              .then((res) => setUserData(res.data));
+          });
       }
     });
 

@@ -9,6 +9,7 @@ const UpdateProfile = () => {
   const allUser = useLoaderData();
   const { user } = useContext(AuthContext);
 
+  console.log('allUser',allUser)
   useEffect(() => {
     const findUser = allUser.find((n) => n.email === user.email);
     setFindingUser(findUser);

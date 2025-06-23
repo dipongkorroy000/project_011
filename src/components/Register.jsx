@@ -29,7 +29,7 @@ const Register = () => {
             axios
               .post(
                 "https://assignment-011-server-side.vercel.app/user",
-                newUserData
+                newUserData,{withCredentials:true}
               )
               .then((res) => {
                 if (res.data.insertedId) {
