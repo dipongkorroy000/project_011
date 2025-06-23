@@ -41,6 +41,7 @@ const router = createBrowserRouter([
             `https://assignment-011-server-side.vercel.app/user?email=${params.email}`,
             {
               credentials: "include",
+              method:"GET"
             }
           ),
         element: (
@@ -123,10 +124,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/updateProfile",
-        loader: () =>
-          fetch("https://assignment-011-server-side.vercel.app/user", {
-            credentials: 'include',
-          }),
+        // loader: () =>
+          // fetch("https://assignment-011-server-side.vercel.app/user", {
+          //   credentials: 'include',
+          // }),
         element: (
           <PrivateRoute>
             <UpdateProfile></UpdateProfile>

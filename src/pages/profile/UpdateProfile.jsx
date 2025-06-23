@@ -1,19 +1,44 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import React, { useContext} from "react";
+import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 const UpdateProfile = () => {
+  // const [allUser, setAllUser] = useState();
   const navigate = useNavigate();
-  const [findingUser, setFindingUser] = useState({});
-  const allUser = useLoaderData();
+  // const [findingUser, setFindingUser] = useState({});
+  // const allUser = useLoaderData();
   const { user } = useContext(AuthContext);
 
-  console.log('allUser',allUser)
-  useEffect(() => {
-    const findUser = allUser.find((n) => n.email === user.email);
-    setFindingUser(findUser);
-  }, [user]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://assignment-011-server-side.vercel.app/user",
+  //       { email: user?.email },
+  //       { withCredentials: true }
+  //     )
+  //     .then((res) => {
+  //       const findUser = res.data.find((n) => n.email === user.email);
+  //       // setFindingUser(findUser);
+  //     });
+  //   // fetch(
+  //   //   "https://assignment-011-server-side.vercel.app/user",
+  //   //   { email: user.email },
+  //   //   {
+  //   //     credentials: "include",
+  //   //   }
+  //   // )
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => {
+  //   //     console.log(data), setAllUser(data);
+  //   //   });
+  // }, []);
+
+  // console.log("allUser", allUser);
+  // useEffect(() => {
+  //   const findUser = allUser.find((n) => n.email === user.email);
+  //   setFindingUser(findUser);
+  // }, [user]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -23,23 +48,31 @@ const UpdateProfile = () => {
     const email = user.email;
 
     const userData = { email, name, photo };
-    console.log(userData);
 
-    if (!findingUser) {
-      console.log("post data");
-      axios
-        .post("https://assignment-011-server-side.vercel.app/user", userData)
-        .then(() => navigate(`/profile/${email}`));
-    } else {
-      console.log("update data", findingUser);
-
-      axios
+    axios
         .put(
-          `https://assignment-011-server-side.vercel.app/user/${findingUser._id}`,
-          userData
+          `https://assignment-011-server-side.vercel.app/user/${user.email}`,
+          userData,{withCredentials: true}
         )
-        .then((res) => console.log(res), navigate(`/profile/${email}`));
-    }
+        .then(() => navigate(`/profile/${email}`));
+
+    // if (!findingUser) {
+    //   console.log("post data");
+    //   axios
+    //     .post("https://assignment-011-server-side.vercel.app/user", userData, {
+    //       withCredentials: true,
+    //     })
+    //     .then(() => navigate(`/profile/${email}`));
+    // } else {
+    //   console.log("update data", findingUser);
+
+    //   axios
+    //     .put(
+    //       `https://assignment-011-server-side.vercel.app/user/${findingUser._id}`,
+    //       userData
+    //     )
+    //     .then((res) => console.log(res), navigate(`/profile/${email}`));
+    // }
   };
 
   return (

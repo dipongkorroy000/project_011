@@ -8,8 +8,6 @@ const Profile = () => {
   const userData = useLoaderData();
   const { userDelete, user } = useContext(AuthContext);
 
-  console.log('userData',userData)
-
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
