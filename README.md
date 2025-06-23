@@ -10,7 +10,8 @@
     "react-simple-typewriter": "^5.0.1",
     "react-toastify": "^11.0.5",
     "sweetalert2": "^11.22.0",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.10",
+    "JWT": "Add token"
 
 
 ## Expanding the ESLint configuration
