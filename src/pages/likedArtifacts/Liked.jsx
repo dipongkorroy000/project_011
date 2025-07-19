@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { deleteId, getIds } from "../../saveLocalStorage/saveIdLocalStorage";
-import { useLoaderData } from "react-router";
 import Item from "./Item";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Liked = () => {
+  const ids = getIds();
   const [cart, setCart] = useState([]);
 
-  let items = useLoaderData();
-  const ids = getIds();
-
   useEffect(() => {
-    const carts = items.filter((n) => ids.includes(n._id));
-    setCart(carts);
+    axios.get("http://localhost:3100/artifacts").then((res) => {
+      const filteredData = res.data.filter((item) => ids.includes(item._id));
+      setCart(filteredData);
+    });
   }, []);
 
   const deleteIdCart = (id) => {
@@ -31,8 +31,8 @@ const Liked = () => {
         setCart(carts);
 
         Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
+          title: "Remove!",
+          text: "Your file has been Remove.",
           icon: "success",
         });
       }
@@ -44,8 +44,8 @@ const Liked = () => {
       <div className="hero bg-base-200 min-h-fit mb-5">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold">Liked Cart</h1>
-            <p className="py-6">Favorite Items : {cart.length}</p>
+            <h1 className="text-2xl font-bold mb-2">Liked Cart</h1>
+            <p>Favorite Items : {cart.length}</p>
           </div>
         </div>
       </div>
@@ -54,6 +54,7 @@ const Liked = () => {
           <Item deleteIdCart={deleteIdCart} n={n} key={n._id}></Item>
         ))}
       </div>
+      {cart.length === 0 && <h2 className="font-bold text-xl text-center text-yellow-400">Not Found Data</h2>}
     </section>
   );
 };

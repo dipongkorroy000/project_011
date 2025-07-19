@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const Profile = () => {
   const navigate = useNavigate();
   const userData = useLoaderData();
-  const { userDelete, user } = useContext(AuthContext);
+  const { userDelete, user, loading } = useContext(AuthContext);
 
   const handleDelete = () => {
     Swal.fire({
@@ -33,6 +33,14 @@ const Profile = () => {
       }
     });
   };
+
+  if (loading) {
+    return (
+      <div className="w-fit mx-auto">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <section className="w-3/5 mx-auto my-10">

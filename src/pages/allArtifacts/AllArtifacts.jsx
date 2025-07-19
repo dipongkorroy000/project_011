@@ -5,23 +5,28 @@ import FindArtifact from "./FindArtifact";
 
 const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
-  const { user } = useContext(AuthContext);
-
-  // const ids = getIds();
+  const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://assignment-011-server-side.vercel.app/artifact")
+    fetch("http://localhost:3100/artifacts")
       .then((res) => res.json())
       .then((data) => {
-
         setArtifacts(data);
       });
   }, [user]);
 
+  if (loading) {
+    return (
+      <div className="w-fit mx-auto">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
+  }
+
   return (
     <section className="my-10 w-10/12 mx-auto">
       <div></div>
-      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5 border-gray-700 border p-5">
+      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
         {artifacts?.map((n) => (
           <FindArtifact n={n} key={n._id}></FindArtifact>
         ))}

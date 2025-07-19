@@ -48,19 +48,19 @@ const AllPhoto = () => {
   return (
     <div className="flex flex-col gap-5">
       {/* data */}
-      <div className="grid grid-cols-4 max-xl:grid-cols-2 max-md:grid-cols-1 gap-8">
+      <div className="grid grid-cols-4 max-xl:grid-cols-2 max-md:grid-cols-1 gap-8 max-md:gap-4 max-md:mx-5">
         {photos.map((n, index) => (
           <Cart n={n} key={index}></Cart>
         ))}
       </div>
 
-      <div className="flex justify-center border border-gray-600 p-2 rounded-xl">
+      <div className="flex justify-center border border-gray-600 p-2 max-md:p-1 max-md:mx-5 rounded-xl">
         {/* seemore button  */}
         <button
           onClick={handleSeeMore}
-          className={`btn btn-primary ${moreBtn && "hidden"}`}
+          className={`btn btn-primary max-md:px-2 ${moreBtn && "hidden"}`}
         >
-          See More
+          See more
         </button>
 
         {/* page scroll  */}

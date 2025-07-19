@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
@@ -8,37 +8,7 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
   // const [findingUser, setFindingUser] = useState({});
   // const allUser = useLoaderData();
-  const { user } = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://assignment-011-server-side.vercel.app/user",
-  //       { email: user?.email },
-  //       { withCredentials: true }
-  //     )
-  //     .then((res) => {
-  //       const findUser = res.data.find((n) => n.email === user.email);
-  //       // setFindingUser(findUser);
-  //     });
-  //   // fetch(
-  //   //   "https://assignment-011-server-side.vercel.app/user",
-  //   //   { email: user.email },
-  //   //   {
-  //   //     credentials: "include",
-  //   //   }
-  //   // )
-  //   //   .then((res) => res.json())
-  //   //   .then((data) => {
-  //   //     console.log(data), setAllUser(data);
-  //   //   });
-  // }, []);
-
-  // console.log("allUser", allUser);
-  // useEffect(() => {
-  //   const findUser = allUser.find((n) => n.email === user.email);
-  //   setFindingUser(findUser);
-  // }, [user]);
+  const { user, loading } = useContext(AuthContext);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -50,30 +20,17 @@ const UpdateProfile = () => {
     const userData = { email, name, photo };
 
     axios
-        .put(
-          `https://assignment-011-server-side.vercel.app/user/${user.email}`,
-          userData,{withCredentials: true}
-        )
-        .then(() => navigate(`/profile/${email}`));
-
-    // if (!findingUser) {
-    //   console.log("post data");
-    //   axios
-    //     .post("https://assignment-011-server-side.vercel.app/user", userData, {
-    //       withCredentials: true,
-    //     })
-    //     .then(() => navigate(`/profile/${email}`));
-    // } else {
-    //   console.log("update data", findingUser);
-
-    //   axios
-    //     .put(
-    //       `https://assignment-011-server-side.vercel.app/user/${findingUser._id}`,
-    //       userData
-    //     )
-    //     .then((res) => console.log(res), navigate(`/profile/${email}`));
-    // }
+      .put(`http://localhost:3100/user/${user.email}`, userData, { withCredentials: true })
+      .then(() => navigate(`/profile/${email}`));
   };
+
+  if (loading) {
+    return (
+      <div className="w-fit mx-auto">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto my-10">
@@ -81,22 +38,10 @@ const UpdateProfile = () => {
         <h1 className="text-5xl font-bold">Update Info</h1>
         <form onSubmit={handleUpdate} className="fieldset">
           <label className="label">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="input"
-            placeholder="Enter Your Name"
-            required
-          />
+          <input type="text" name="name" className="input" placeholder="Enter Your Name" required />
 
           <label className="label">Photo</label>
-          <input
-            type="url"
-            name="photo"
-            className="input"
-            placeholder="Enter Photo URL"
-            required
-          />
+          <input type="url" name="photo" className="input" placeholder="Enter Photo URL" required />
 
           <button type="submit" className="btn btn-neutral mt-4">
             Submit

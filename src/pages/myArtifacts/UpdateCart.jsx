@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useLoaderData } from "react-router";
+import { toast } from "react-toastify";
 
 const UpdateCart = () => {
   const data = useLoaderData();
@@ -26,47 +27,32 @@ const UpdateCart = () => {
     const data = Object.fromEntries(formData.entries());
 
     axios
-      .put(
-        `https://assignment-011-server-side.vercel.app/artifact/${_id}`,
-        data
-      )
-      .then(() => {})
+      .patch(`http://localhost:3100/artifact/${_id}`, data)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          toast("Updated Successfully");
+        }
+      })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-base-">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
-            <h1 className="text-5xl font-semibold">Update Artifact</h1>
+            <h1 className="text-2xl min-w-sm font-semibold">Update Artifact</h1>
             <form onSubmit={handleUpdate} className="fieldset">
               <label className="label">Name</label>
-              <input
-                defaultValue={name}
-                name="name"
-                type="text"
-                className="input"
-                placeholder="Artifact Name"
-              />
+              <input defaultValue={name} name="name" type="text" className="input" placeholder="Artifact Name" />
 
               {/* Image */}
               <label className="label">Image</label>
-              <input
-                defaultValue={image}
-                name="image"
-                type="url"
-                className="input"
-                placeholder="Artifact Image URL"
-              />
+              <input defaultValue={image} name="image" type="url" className="input" placeholder="Artifact Image URL" />
 
               {/* Artifact Type */}
               <label className="label">Artifact Type</label>
-              <select
-                name="artifact_type"
-                defaultValue={artifact_type}
-                className="select select-primary"
-              >
+              <select name="artifact_type" defaultValue={artifact_type} className="select select-primary">
                 <option disabled={true}>Artifact Type</option>
                 <option>Tools</option>
                 <option>Documents</option>
@@ -155,7 +141,7 @@ const UpdateCart = () => {
                 readOnly
               />
 
-              <button type="submit" className="btn btn-neutral mt-4">
+              <button type="submit" className="btn mt-4">
                 Submit
               </button>
             </form>

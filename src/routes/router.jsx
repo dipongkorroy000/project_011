@@ -15,6 +15,8 @@ import UpdateCart from "../pages/myArtifacts/UpdateCart";
 import Error from "../components/error/Error";
 import Search from "../pages/Search/Search";
 import UpdateProfile from "../pages/profile/UpdateProfile";
+import ArtifactDetails from "../pages/home/FeatureArtifacts.jsx/topArtifacts/ArtifactDetails";
+
 
 const router = createBrowserRouter([
   {
@@ -37,13 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/:email",
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`,
-            {
-              credentials: "include",
-              method:"GET"
-            }
-          ),
+          fetch(`http://localhost:3100/user?email=${params.email}`, {
+            credentials: "include",
+            method: "GET",
+          }),
         element: (
           <PrivateRoute>
             <Profile></Profile>
@@ -53,12 +52,9 @@ const router = createBrowserRouter([
       {
         path: "/addArtifact/:email",
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-011-server-side.vercel.app/user?email=${params.email}`,
-            {
-              credentials: "include",
-            }
-          ),
+          fetch(`http://localhost:3100/user?email=${params.email}`, {
+            credentials: "include",
+          }),
         element: (
           <PrivateRoute>
             <AddArtifact></AddArtifact>
@@ -74,9 +70,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        hydrateFallbackElement: (
-          <span className="loading loading-ring loading-xl mx-auto"></span>
-        ),
+        hydrateFallbackElement: <span className="loading loading-ring loading-xl mx-auto"></span>,
         path: "/allArtifact",
         element: <AllArtifacts></AllArtifacts>,
       },
@@ -87,10 +81,7 @@ const router = createBrowserRouter([
           </div>
         ),
         path: "/details/:id",
-        loader: ({ params }) =>
-          fetch(
-            `https://assignment-011-server-side.vercel.app/artifact/${params.id}`
-          ),
+        loader: ({ params }) => fetch(`http://localhost:3100/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <Details></Details>
@@ -100,16 +91,15 @@ const router = createBrowserRouter([
 
       {
         path: "/liked",
-        loader: () =>
-          fetch("https://assignment-011-server-side.vercel.app/artifact"),
-        element: <Liked></Liked>,
+        element: (
+          <PrivateRoute>
+            <Liked></Liked>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/updateCart/:id",
-        loader: ({ params }) =>
-          fetch(
-            `https://assignment-011-server-side.vercel.app/artifact/${params.id}`
-          ),
+        loader: ({ params }) => fetch(`http://localhost:3100/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateCart></UpdateCart>
@@ -118,21 +108,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        loader: () =>
-          fetch("https://assignment-011-server-side.vercel.app/artifact"),
+        loader: () => fetch("http://localhost:3100/artifact"),
         element: <Search></Search>,
       },
       {
         path: "/updateProfile",
         // loader: () =>
-          // fetch("https://assignment-011-server-side.vercel.app/user", {
-          //   credentials: 'include',
-          // }),
+        // fetch("http://localhost:3100/user", {
+        //   credentials: 'include',
+        // }),
         element: (
           <PrivateRoute>
             <UpdateProfile></UpdateProfile>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/artifactDetails/:id",
+        Component: ArtifactDetails,
       },
     ],
   },

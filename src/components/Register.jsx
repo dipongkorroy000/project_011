@@ -1,85 +1,72 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const Register = () => {
-  const [passError, setPassError] = useState();
   const { signUp } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleCreateUser = (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const photo = e.target.photo.value;
+    const pass = e.target.password.value;
+
+    if (!name || !email || !photo || !pass) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Check the register data!",
+      });
+      return;
+    }
+
+    const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    const { email, password, ...userData } = data;
-    const newUserData = { ...userData, email };
+    const { password, ...userData } = data;
+    const newUserData = { ...userData };
 
-    if (password.length < 6) {
-      return setPassError("pass must be minimum 6 character");
-    } else {
-      setPassError("");
-      signUp(email, password)
-        .then((res) => {
-          if (res.user.metadata) {
-            axios
-              .post(
-                "https://assignment-011-server-side.vercel.app/user",
-                newUserData,{withCredentials:true}
-              )
-              .then((res) => {
-                if (res.data.insertedId) {
-                  Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "This new Job has been saved and published.",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-                  navigate("/");
-                }
-              })
-              .catch((error) => console.log(error));
-          }
-        })
-        .catch((error) => console.log(error));
-    }
+    signUp(email, password)
+      .then((res) => {
+        if (res.user.metadata) {
+          axios
+            .post("http://localhost:3100/user", newUserData, { withCredentials: true })
+            .then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Registration successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            })
+            .catch((error) => console.log(error));
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto my-10">
       <div className="card-body">
-        <h1 className="text-5xl font-bold">Register now!</h1>
+        <h1 className="text-3xl font-bold">Register now!</h1>
         <form onSubmit={handleCreateUser} className="fieldset">
           <label className="label">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="input"
-            placeholder="Enter Your Name"
-            required
-          />
+          <input type="text" name="name" className="input" placeholder="Enter Your Name" />
 
           <label className="label">Photo</label>
-          <input
-            type="url"
-            name="photo"
-            className="input"
-            placeholder="Enter Photo URL"
-          />
+          <input type="url" name="photo" className="input" placeholder="Enter Photo URL" />
 
           <label className="label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="input"
-            placeholder="Email"
-            required
-          />
+          <input type="email" name="email" className="input" placeholder="Email" />
 
           <label className="label">Password</label>
           <input
@@ -89,12 +76,9 @@ const Register = () => {
             placeholder="Password"
             pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}"
             title="The password must contain at least one lowercase letter, one uppercase letter, and be at least 6 characters long."
-            required
           />
 
-          <h2 className="text-red-400">{passError}</h2>
-
-          <button type="submit" className="btn btn-neutral mt-4">
+          <button type="submit" className="btn mt-4">
             SignUp
           </button>
         </form>

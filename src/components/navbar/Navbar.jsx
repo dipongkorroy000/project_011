@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, logoutUser, setSearchText } = useContext(AuthContext);
+  const { user, logoutUser, setSearchText, loading } = useContext(AuthContext);
 
   const [theme, setTheme] = useState(false);
 
@@ -24,6 +24,14 @@ const Navbar = () => {
     setSearchText(search);
   };
 
+  if (loading) {
+    return (
+      <div className="w-fit mx-auto">
+        <span className="loading loading-ring loading-xl"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="dropdown">
@@ -36,18 +44,10 @@ const Navbar = () => {
             stroke="currentColor"
           >
             {" "}
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h7"
-            />{" "}
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />{" "}
           </svg>
         </div>
-        <ul
-          tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-        >
+        <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
