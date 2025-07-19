@@ -19,11 +19,14 @@ const Artifact = ({ n }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/myArtifact");
-        axios.delete(`http://localhost:3100/artifact/delete/${id}`, id).then((res) => console.log(res));
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
+        axios.delete(`http://localhost:3100/artifact/delete/${id}`).then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
         });
       }
     });

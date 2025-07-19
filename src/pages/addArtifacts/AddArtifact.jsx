@@ -16,7 +16,7 @@ const AddArtifact = () => {
 
     // fetch("http://localhost:3100/").then((res) => res.json());
     axios
-      .post("http://localhost:3100/artifact", { ...data, liked: 0 })
+      .post("http://localhost:3100/artifact", { ...data, liked: 0 }, { withCredentials: true })
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

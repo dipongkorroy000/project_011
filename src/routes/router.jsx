@@ -54,6 +54,7 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3100/user?email=${params.email}`, {
             credentials: "include",
+            method: "GET"
           }),
         element: (
           <PrivateRoute>
@@ -108,7 +109,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        loader: () => fetch("http://localhost:3100/artifact"),
+        loader: () => fetch("http://localhost:3100/artifacts"),
         element: <Search></Search>,
       },
       {

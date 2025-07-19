@@ -2,12 +2,11 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const UpdateProfile = () => {
-  // const [allUser, setAllUser] = useState();
   const navigate = useNavigate();
-  // const [findingUser, setFindingUser] = useState({});
-  // const allUser = useLoaderData();
   const { user, loading } = useContext(AuthContext);
 
   const handleUpdate = (e) => {
@@ -15,13 +14,23 @@ const UpdateProfile = () => {
 
     const name = e.target.name.value;
     const photo = e.target.photo.value;
-    const email = user.email;
 
-    const userData = { email, name, photo };
+    const userData = { name, photo };
 
     axios
-      .put(`http://localhost:3100/user/${user.email}`, userData, { withCredentials: true })
-      .then(() => navigate(`/profile/${email}`));
+      .patch(`http://localhost:3100/userUpdate?email=${user.email}`, userData, { withCredentials: true })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          toast("Profile Update successfully");
+          navigate(`/profile/${user?.email}`);
+        } else {
+          Swal.fire({
+            title: "The Problem?",
+            text: "That thing is still around?",
+            icon: "question",
+          });
+        }
+      });
   };
 
   if (loading) {
