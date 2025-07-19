@@ -35,7 +35,7 @@ const Register = () => {
       .then((res) => {
         if (res.user.metadata) {
           axios
-            .post("http://localhost:3100/user", newUserData, { withCredentials: true })
+            .post("https://assignment-011-server-side.vercel.app/user", newUserData, { withCredentials: true })
             .then((res) => {
               if (res.data.insertedId) {
                 Swal.fire({

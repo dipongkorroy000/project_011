@@ -5,7 +5,7 @@ import { Link } from "react-router";
 const TopArtifacts = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3100/top-artifacts").then((artifacts) => setData(artifacts.data));
+    axios.get("https://assignment-011-server-side.vercel.app/top-artifacts").then((artifacts) => setData(artifacts.data));
   }, []);
 
   return (

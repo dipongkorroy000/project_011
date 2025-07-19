@@ -39,7 +39,7 @@ const router = createBrowserRouter([
       {
         path: "/profile/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/user?email=${params.email}`, {
+          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`, {
             credentials: "include",
             method: "GET",
           }),
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/addArtifact/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:3100/user?email=${params.email}`, {
+          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`, {
             credentials: "include",
             method: "GET"
           }),
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
           </div>
         ),
         path: "/details/:id",
-        loader: ({ params }) => fetch(`http://localhost:3100/artifact/${params.id}`),
+        loader: ({ params }) => fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <Details></Details>
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/updateCart/:id",
-        loader: ({ params }) => fetch(`http://localhost:3100/artifact/${params.id}`),
+        loader: ({ params }) => fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateCart></UpdateCart>
@@ -109,13 +109,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        loader: () => fetch("http://localhost:3100/artifacts"),
+        loader: () => fetch("https://assignment-011-server-side.vercel.app/artifacts"),
         element: <Search></Search>,
       },
       {
         path: "/updateProfile",
         // loader: () =>
-        // fetch("http://localhost:3100/user", {
+        // fetch("https://assignment-011-server-side.vercel.app/user", {
         //   credentials: 'include',
         // }),
         element: (

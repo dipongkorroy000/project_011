@@ -19,7 +19,7 @@ const Artifact = ({ n }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/myArtifact");
-        axios.delete(`http://localhost:3100/artifact/delete/${id}`).then((res) => {
+        axios.delete(`https://assignment-011-server-side.vercel.app/artifact/delete/${id}`).then((res) => {
           if (res.status === 200) {
             Swal.fire({
               title: "Deleted!",

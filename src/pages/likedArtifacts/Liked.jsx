@@ -9,7 +9,7 @@ const Liked = () => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3100/artifacts").then((res) => {
+    axios.get("https://assignment-011-server-side.vercel.app/artifacts").then((res) => {
       const filteredData = res.data.filter((item) => ids.includes(item._id));
       setCart(filteredData);
     });

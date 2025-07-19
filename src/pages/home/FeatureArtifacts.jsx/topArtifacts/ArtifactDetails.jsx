@@ -7,7 +7,7 @@ const ArtifactDetails = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3100/artifact/${id}`).then((res) => setData(res.data));
+    axios.get(`https://assignment-011-server-side.vercel.app/artifact/${id}`).then((res) => setData(res.data));
   }, []);
 
   return (

@@ -18,7 +18,7 @@ const UpdateProfile = () => {
     const userData = { name, photo };
 
     axios
-      .patch(`http://localhost:3100/userUpdate?email=${user.email}`, userData, { withCredentials: true })
+      .patch(`https://assignment-011-server-side.vercel.app/userUpdate?email=${user.email}`, userData, { withCredentials: true })
       .then((res) => {
         if (res.data.modifiedCount) {
           toast("Profile Update successfully");

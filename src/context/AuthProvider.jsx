@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         axios
           .post(
-            "http://localhost:3100/jwt",
+            "https://assignment-011-server-side.vercel.app/jwt",
             { email: currentUser.email },
             {
               withCredentials: true,
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
           )
           .then(() => {
             axios
-              .get(`http://localhost:3100/user?email=${currentUser?.email}`, {
+              .get(`https://assignment-011-server-side.vercel.app/user?email=${currentUser?.email}`, {
                 withCredentials: true,
               })
               .then((res) => setUserData(res.data));

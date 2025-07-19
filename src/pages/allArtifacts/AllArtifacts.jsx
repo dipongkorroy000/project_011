@@ -8,7 +8,7 @@ const AllArtifacts = () => {
   const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:3100/artifacts")
+    fetch("https://assignment-011-server-side.vercel.app/artifacts")
       .then((res) => res.json())
       .then((data) => {
         setArtifacts(data);

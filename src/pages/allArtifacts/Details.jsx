@@ -22,7 +22,7 @@ const Details = () => {
   } = task;
 
   const handleLike = async (id) => {
-    await axios.patch(`http://localhost:3100/artifactLiked/${id}`).then((res) => {
+    await axios.patch(`https://assignment-011-server-side.vercel.app/artifactLiked/${id}`).then((res) => {
       if (res.data.modifiedCount) {
         toast("You liked this artifact");
         saveId(id);

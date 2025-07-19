@@ -27,7 +27,7 @@ const UpdateCart = () => {
     const data = Object.fromEntries(formData.entries());
 
     axios
-      .patch(`http://localhost:3100/artifact/${_id}`, data)
+      .patch(`https://assignment-011-server-side.vercel.app/artifact/${_id}`, data)
       .then((res) => {
         if (res.data.modifiedCount) {
           toast("Updated Successfully");
