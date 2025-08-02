@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 const Login = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const login = (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ const Login = () => {
 
   const googleLoginUser = () => {
     googleLogin().then((res) => {
-      navigate("/");
+      navigate(location.state?.from || "/");
       if (res.user.email) {
         toast("login successfully");
       }

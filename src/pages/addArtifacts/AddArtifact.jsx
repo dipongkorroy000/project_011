@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router";
+
 import { Helmet } from "react-helmet-async";
 
 const AddArtifact = () => {
-  const userData = useLoaderData();
   const { user, loading } = useContext(AuthContext);
 
   const handleAddArtifact = (e) => {
@@ -15,7 +14,6 @@ const AddArtifact = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // fetch("https://assignment-011-server-side.vercel.app/").then((res) => res.json());
     axios
       .post("https://assignment-011-server-side.vercel.app/artifact", { ...data, liked: 0 }, { withCredentials: true })
       .then((res) => {
@@ -94,7 +92,7 @@ const AddArtifact = () => {
             <input name="present_location" type="text" className="input" placeholder="Present Location" />
 
             {/* Artifact adder name */}
-            <label className="label">User Name</label>
+            {/* <label className="label">User Name</label>
             <input
               defaultValue={userData?.name}
               name="artifact_name"
@@ -102,7 +100,7 @@ const AddArtifact = () => {
               className="input"
               placeholder="Artifact Name"
               readOnly
-            />
+            /> */}
 
             {/* Artifact adder email */}
             <label className="label">Email</label>

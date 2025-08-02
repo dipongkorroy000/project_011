@@ -54,7 +54,7 @@ const Navbar = () => {
             <NavLink to="/allArtifact">All Artifacts</NavLink>
           </li>
           <li>
-            <NavLink to={`/addArtifact/${user?.email}`}>Add Artifacts</NavLink>
+            <NavLink to={`/addArtifact`}>Add Artifacts</NavLink>
           </li>
           <li>
             <NavLink to={`/setting`}>Setting</NavLink>

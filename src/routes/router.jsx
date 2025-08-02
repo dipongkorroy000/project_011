@@ -13,7 +13,7 @@ import Details from "../pages/allArtifacts/Details";
 import Liked from "../pages/likedArtifacts/Liked";
 import UpdateCart from "../pages/myArtifacts/UpdateCart";
 import Error from "../components/error/Error";
-import Search from "../pages/Search/Search";
+import Search from "../pages/search/Search";
 import UpdateProfile from "../pages/profile/UpdateProfile";
 import ArtifactDetails from "../pages/home/FeatureArtifacts.jsx/topArtifacts/ArtifactDetails";
 import Settings from "../pages/settings/Settings";
@@ -50,12 +50,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/addArtifact/:email",
-        loader: ({ params }) =>
-          fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`, {
-            credentials: "include",
-            method: "GET",
-          }),
+        path: "/addArtifact",
         element: (
           <PrivateRoute>
             <AddArtifact></AddArtifact>

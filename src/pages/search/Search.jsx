@@ -8,8 +8,6 @@ const Search = () => {
   const { searchText } = useContext(AuthContext);
   const data = useLoaderData();
 
-  console.log(data);
-
   const artifact = data.filter((n) => n.name.toLowerCase() === searchText.toLowerCase());
 
   return (
