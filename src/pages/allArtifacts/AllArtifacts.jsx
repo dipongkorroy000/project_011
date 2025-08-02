@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import FindArtifact from "./FindArtifact";
+import { Helmet } from "react-helmet-async";
 // import { getIds } from "../../saveLocalStorage/saveIdLocalStorage";
 
 const AllArtifacts = () => {
@@ -24,14 +25,19 @@ const AllArtifacts = () => {
   }
 
   return (
-    <section className="my-10 w-10/12 mx-auto">
-      <div></div>
-      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
-        {artifacts?.map((n) => (
-          <FindArtifact n={n} key={n._id}></FindArtifact>
-        ))}
-      </div>
-    </section>
+    <>
+      <Helmet>
+        <title>Artifact | All Artifacts</title>
+      </Helmet>
+      <section className="my-10 w-10/12 mx-auto">
+        <div></div>
+        <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
+          {artifacts?.map((n) => (
+            <FindArtifact n={n} key={n._id}></FindArtifact>
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 

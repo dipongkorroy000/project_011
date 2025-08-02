@@ -3,6 +3,7 @@ import { deleteId, getIds } from "../../saveLocalStorage/saveIdLocalStorage";
 import Item from "./Item";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Liked = () => {
   const ids = getIds();
@@ -40,22 +41,27 @@ const Liked = () => {
   };
 
   return (
-    <section className=" w-10/12 mx-auto my-10">
-      <div className="hero bg-base-200 min-h-fit mb-5">
-        <div className="hero-content text-center">
-          <div className="max-w-md">
-            <h1 className="text-2xl font-bold mb-2">Liked Cart</h1>
-            <p>Favorite Items : {cart.length}</p>
+    <>
+      <Helmet>
+        <title>Artifact | Liked Artifacts</title>
+      </Helmet>
+      <section className=" w-10/12 mx-auto my-10">
+        <div className="hero bg-base-200 min-h-fit mb-5">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <h1 className="text-2xl font-bold mb-2">Liked Cart</h1>
+              <p>Favorite Items : {cart.length}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
-        {cart?.map((n) => (
-          <Item deleteIdCart={deleteIdCart} n={n} key={n._id}></Item>
-        ))}
-      </div>
-      {cart.length === 0 && <h2 className="font-bold text-xl text-center text-yellow-400">Not Found Data</h2>}
-    </section>
+        <div className="grid grid-cols-3 max-lg:grid-cols-1 max-2xl:grid-cols-2 gap-5">
+          {cart?.map((n) => (
+            <Item deleteIdCart={deleteIdCart} n={n} key={n._id}></Item>
+          ))}
+        </div>
+        {cart.length === 0 && <h2 className="font-bold text-xl text-center text-yellow-400">Not Found Data</h2>}
+      </section>
+    </>
   );
 };
 

@@ -3,10 +3,17 @@ import AllPhoto from "./AllPhoto";
 import Slider from "./Slider";
 import TopArtifacts from "./FeatureArtifacts.jsx/topArtifacts/TopArtifacts";
 import { Link } from "react-router";
+import Section from "./section/Section";
+import Views from "./views/Views";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>Artifact | Historical Artifacts Tracker</title>
+      </Helmet>
+
       {/* banner  */}
       <section className="hero max-md:h-60 h-96 bg-[url(https://i.ibb.co/BVQ40GjL/fantasy-scene-with-futuristic-human-character.jpg)]">
         <div className="hero-overlay"></div>
@@ -31,7 +38,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="w-4/6 mx-auto my-10">
+      {/* slider */}
+      <section className="w-5/6 mx-auto my-10">
         <Slider></Slider>
       </section>
 
@@ -55,6 +63,16 @@ const Home = () => {
         <div className="w-5/6 mx-auto mb-10 mt-5">
           <AllPhoto></AllPhoto>
         </div>
+      </section>
+
+      {/* section accordion */}
+      <section className="w-5/6 mx-auto my-10">
+        <Section></Section>
+      </section>
+
+      {/* Page view section */}
+      <section className="w-5/6 mx-auto my-10 flex items-center justify-center">
+        <Views></Views>
       </section>
     </>
   );

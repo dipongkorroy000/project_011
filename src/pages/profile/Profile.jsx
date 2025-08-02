@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -43,24 +44,29 @@ const Profile = () => {
   }
 
   return (
-    <section className="w-3/5 mx-auto my-10">
-      <div className="shadow-2xl w-full border rounded-2xl p-5">
-        <div className="flex justify-between">
-          <h2 className="text-blue-500 my-auto ">Profile</h2>
-          <Link to="/updateProfile" className="btn btn-primary">
-            Update Profile
-          </Link>
+    <>
+      <Helmet>
+        <title>Artifact | Profile</title>
+      </Helmet>
+      <section className="w-3/5 mx-auto my-10">
+        <div className="shadow-2xl w-full border rounded-2xl p-5">
+          <div className="flex justify-between">
+            <h2 className="text-blue-500 my-auto ">Profile</h2>
+            <Link to="/updateProfile" className="btn btn-primary">
+              Update Profile
+            </Link>
+          </div>
+          <div className="space-y-2">
+            <h2>{userData.name}</h2>
+            <h2>{user.email}</h2>
+            <img src={userData?.photo} alt="Your Photo" />
+          </div>
+          <button onClick={handleDelete} className="btn btn-warning my-5">
+            Delete Profile
+          </button>
         </div>
-        <div className="space-y-2">
-          <h2>{userData.name}</h2>
-          <h2>{user.email}</h2>
-          <img src={userData?.photo} alt="Your Photo" />
-        </div>
-        <button onClick={handleDelete} className="btn btn-warning my-5">
-          Delete Profile
-        </button>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

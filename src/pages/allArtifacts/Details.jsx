@@ -3,6 +3,7 @@ import React from "react";
 import { useLoaderData } from "react-router";
 import { toast } from "react-toastify";
 import { saveId } from "../../saveLocalStorage/saveIdLocalStorage";
+import { Helmet } from "react-helmet-async";
 
 const Details = () => {
   const task = useLoaderData();
@@ -31,6 +32,10 @@ const Details = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Artifact | Artifact Details</title>
+      </Helmet>
     <div className="card bg-base-100 w-3/5 max-md:w-fit shadow-xl mx-auto border border-gray-700 my-10 p-5 max-md:mx-8">
       <figure>
         <img src={image} alt="Shoes" className="rounded-xl" />
@@ -66,7 +71,7 @@ const Details = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

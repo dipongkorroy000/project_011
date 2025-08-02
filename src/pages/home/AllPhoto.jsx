@@ -54,7 +54,7 @@ const AllPhoto = () => {
         ))}
       </div>
 
-      <div className="flex justify-center border border-gray-600 p-2 max-md:p-1 max-md:mx-5 rounded-xl">
+      <div className="flex justify-center p-2 max-md:p-1 max-md:mx-5 rounded-xl">
         {/* seemore button  */}
         <button
           onClick={handleSeeMore}

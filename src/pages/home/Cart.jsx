@@ -2,7 +2,7 @@ import React from "react";
 
 const Cart = ({ n }) => {
   return (
-    <div className="card bg-base-100 w-fit shadow-sm border border-gray-500">
+    <div className="card bg-base-100 w-fit shadow-lg">
       <div className="card-body max-md:p-3">
         <h2 className="card-title">{n?.title}</h2>
         <p>{n?.body}</p>

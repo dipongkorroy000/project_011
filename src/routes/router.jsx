@@ -16,7 +16,7 @@ import Error from "../components/error/Error";
 import Search from "../pages/Search/Search";
 import UpdateProfile from "../pages/profile/UpdateProfile";
 import ArtifactDetails from "../pages/home/FeatureArtifacts.jsx/topArtifacts/ArtifactDetails";
-
+import Settings from "../pages/settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`https://assignment-011-server-side.vercel.app/user?email=${params.email}`, {
             credentials: "include",
-            method: "GET"
+            method: "GET",
           }),
         element: (
           <PrivateRoute>
@@ -127,6 +127,10 @@ const router = createBrowserRouter([
       {
         path: "/artifactDetails/:id",
         Component: ArtifactDetails,
+      },
+      {
+        path: "/setting",
+        Component: Settings,
       },
     ],
   },
