@@ -13,10 +13,8 @@ import Details from "../pages/allArtifacts/Details";
 import Liked from "../pages/likedArtifacts/Liked";
 import UpdateCart from "../pages/myArtifacts/UpdateCart";
 import Error from "../components/error/Error";
-import Search from "../pages/search/Search";
 import UpdateProfile from "../pages/profile/UpdateProfile";
 import ArtifactDetails from "../pages/home/FeatureArtifacts.jsx/topArtifacts/ArtifactDetails";
-import Settings from "../pages/settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -72,17 +70,13 @@ const router = createBrowserRouter([
       },
       {
         hydrateFallbackElement: (
-          <div className="flex justify-center">
-            <span className="loading loading-ring loading-xl border"></span>
+          <div className="w-fit mx-auto">
+            <span className="loading loading-bars loading-xs"></span>
           </div>
         ),
         path: "/details/:id",
         loader: ({ params }) => fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
-        element: (
-          <PrivateRoute>
-            <Details></Details>
-          </PrivateRoute>
-        ),
+        element: <Details></Details>,
       },
 
       {
@@ -103,11 +97,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/search",
-        loader: () => fetch("https://assignment-011-server-side.vercel.app/artifacts"),
-        element: <Search></Search>,
-      },
-      {
         path: "/updateProfile",
         // loader: () =>
         // fetch("https://assignment-011-server-side.vercel.app/user", {
@@ -122,10 +111,6 @@ const router = createBrowserRouter([
       {
         path: "/artifactDetails/:id",
         Component: ArtifactDetails,
-      },
-      {
-        path: "/setting",
-        Component: Settings,
       },
     ],
   },

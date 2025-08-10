@@ -49,7 +49,7 @@ const Login = () => {
       </Helmet>
       <div className="card w-full max-w-sm shrink-0 shadow-sm mx-auto my-10">
         <div className="card-body">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+          <h1 className="text-3xl font-bold">Login now!</h1>
           <form onSubmit={login} className="fieldset">
             <label className="label">Email</label>
             <input type="email" name="email" className="input" placeholder="Email" required />

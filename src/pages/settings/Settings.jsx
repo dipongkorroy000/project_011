@@ -40,7 +40,7 @@ const Settings = () => {
           ))}
         </div>
 
-        <div className="mx-auto w-fit">
+        {/* <div className="mx-auto w-fit">
           <div className="card w-96 shadow-sm">
             <div className="card-body">
               <span className="badge badge-xs badge-warning">Most Popular</span>
@@ -88,7 +88,9 @@ const Settings = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
+
+        
       </section>
     </>
   );
