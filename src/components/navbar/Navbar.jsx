@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import User from "./log/User";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
@@ -8,6 +8,7 @@ import { MdOutlineDarkMode } from "react-icons/md";
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
+  const navigate = useNavigate()
 
   // Detect system theme on first load OR use saved theme
   useEffect(() => {
@@ -76,14 +77,14 @@ const Navbar = () => {
             </div>
           </div>
 
-          <span className="btn btn-ghost text-xl">Historical Artifacts</span>
+          <span onClick={()=> navigate("/")} className="btn btn-ghost text-xl">Historical Artifacts</span>
         </div>
 
         {/* Right side: theme toggle + user */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-10">
           {/* Theme toggle button */}
           <span className="cursor-pointer" onClick={toggleTheme}>
-            {theme === "light" ? <MdOutlineDarkMode /> : <CiLight />}
+            {theme === "light" ? <MdOutlineDarkMode size={22}/> : <CiLight size={22}/>}
           </span>
 
           {!user ? (

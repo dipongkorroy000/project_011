@@ -31,7 +31,7 @@ const Register = () => {
     const data = Object.fromEntries(formData.entries());
 
     const { password, ...userData } = data;
-    const newUserData = { ...userData, image };
+    const newUserData = { ...userData, photo: image };
 
     signUp(email, password)
       .then((res) => {
@@ -71,9 +71,7 @@ const Register = () => {
     } catch (error) {
       console.error("Image upload failed:", error);
     }
-
   };
-
 
   return (
     <>
@@ -88,11 +86,7 @@ const Register = () => {
             <input type="text" name="name" className="input" placeholder="Enter Your Name" />
 
             <label className="label">Image</label>
-            <input
-              type="file"
-              onChange={(e) => imageHandle(e)}
-              className="py-2 rounded input"
-            />
+            <input type="file" onChange={(e) => imageHandle(e)} className="py-2 input" />
 
             <label className="label">Email</label>
             <input type="email" name="email" className="input" placeholder="Email" />

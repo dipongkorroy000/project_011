@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddArtifact = () => {
+  const [image, setImage] = useState(null);
   const { user, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddArtifact = (e) => {
     e.preventDefault();
@@ -15,19 +19,35 @@ const AddArtifact = () => {
     const data = Object.fromEntries(formData.entries());
 
     axios
-      .post("https://assignment-011-server-side.vercel.app/artifact", { ...data, liked: 0 }, { withCredentials: true })
+      .post(
+        "https://assignment-011-server-side.vercel.app/artifact",
+        { ...data, liked: 0, image, artifact_email: user?.email },
+        { withCredentials: true }
+      )
       .then((res) => {
         if (res.data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "This new Job has been saved and published.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          toast("Successfully add Artifact");
+          navigate("/myArtifact");
         }
       })
       .catch((error) => console.log(error));
+  };
+
+  const imageHandle = async (e) => {
+    const image = e.target.files[0];
+
+    const imageUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(imageUrl, formData);
+      const uploadedImageUrl = await response.data.data.url;
+      setImage(uploadedImageUrl);
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
   };
 
   if (loading) {
@@ -43,82 +63,136 @@ const AddArtifact = () => {
       <Helmet>
         <title>Artifact | Add Artifact</title>
       </Helmet>
-      <div className="hero my-10">
-        <div className="hero-content flex-col shadow-xl min-w-sm rounded-xl">
-          <h1 className="text-2xl font-bold">Add Artifact</h1>
-          <form onSubmit={handleAddArtifact} className="fieldset w-full">
-            <label className="label">Artifact Name</label>
-            <input name="name" type="text" className="input" placeholder="Enter Artifact Name" />
+      <section className="my-14">
+      <h1 className="text-2xl font-bold text-center mb-5">Add Artifact</h1>
+        <form onSubmit={handleAddArtifact} className="flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 max-w-4xl xl:grid-cols-3 md:grid-cols-2 gap-6">
+            {/* Artifact Name */}
+            <div className="flex flex-col">
+              <label htmlFor="name" className="label">
+                Artifact Name
+              </label>
+              <input id="name" name="name" type="text" className="input" placeholder="Enter Artifact Name" required />
+            </div>
 
             {/* Image */}
-            <label className="label">Image</label>
-            <input name="image" type="url" className="input" placeholder="Artifact Image URL" />
+            <div className="flex flex-col">
+              <label htmlFor="image" className="label">
+                Image
+              </label>
+              <input id="image" type="file" accept="image/*" onChange={(e) => imageHandle(e)} className="input py-2" />
+            </div>
 
             {/* Artifact Type */}
-            <label className="label">Artifact Type</label>
-            <select
-              name="artifact_type"
-              defaultValue="Artifact Type"
-              className="select select-primary border border-gray-600"
-            >
-              <option disabled={true}>Artifact Type</option>
-              <option>Tools</option>
-              <option>Documents</option>
-              <option>Writings</option>
-            </select>
+            <div className="flex flex-col">
+              <label htmlFor="artifact_type" className="label">
+                Artifact Type
+              </label>
+              <select
+                id="artifact_type"
+                name="artifact_type"
+                defaultValue=""
+                className="select select-primary border border-gray-600"
+                required
+              >
+                <option value="" disabled>
+                  Select Artifact Type
+                </option>
+                <option>Tools</option>
+                <option>Documents</option>
+                <option>Writings</option>
+              </select>
+            </div>
 
             {/* Historical Context */}
-            <label className="label">Historical Context</label>
-            <input name="historical_context" type="text" className="input" placeholder="Historical Context" />
-
-            {/* Short description */}
-            <label className="label">description</label>
-            <input name="short_description" type="text" className="input" placeholder="Short description" />
+            <div className="flex flex-col">
+              <label htmlFor="historical_context" className="label">
+                Historical Context
+              </label>
+              <input
+                id="historical_context"
+                name="historical_context"
+                type="text"
+                className="input"
+                placeholder="Historical Context"
+              />
+            </div>
 
             {/* Created At */}
-            <label className="label">Created At</label>
-            <input name="created_at" type="number" className="input" placeholder="Enter the year of the artwork." />
+            <div className="flex flex-col">
+              <label htmlFor="created_at" className="label">
+                Created At (Year)
+              </label>
+              <input
+                id="created_at"
+                name="created_at"
+                type="number"
+                min="0"
+                max={new Date().getFullYear()}
+                className="input"
+                placeholder="Enter year"
+              />
+            </div>
 
             {/* Discovered At */}
-            <label className="label">Discovered At</label>
-            <input name="discover_at" type="text" className="input" placeholder="Discovered At" />
+            <div className="flex flex-col">
+              <label htmlFor="discover_at" className="label">
+                Discovered At
+              </label>
+              <input id="discover_at" name="discover_at" type="text" className="input" placeholder="Discovered At" />
+            </div>
 
             {/* Discovered By */}
-            <label className="label">Discovered By</label>
-            <input name="discovered_by" type="text" className="input" placeholder="Discovered By" />
+            <div className="flex flex-col">
+              <label htmlFor="discovered_by" className="label">
+                Discovered By
+              </label>
+              <input
+                id="discovered_by"
+                name="discovered_by"
+                type="text"
+                className="input"
+                placeholder="Discovered By"
+              />
+            </div>
 
             {/* Present Location */}
-            <label className="label">Location</label>
-            <input name="present_location" type="text" className="input" placeholder="Present Location" />
+            <div className="flex flex-col">
+              <label htmlFor="present_location" className="label">
+                Present Location
+              </label>
+              <input
+                id="present_location"
+                name="present_location"
+                type="text"
+                className="input"
+                placeholder="Present Location"
+              />
+            </div>
 
-            {/* Artifact adder name */}
-            {/* <label className="label">User Name</label>
-            <input
-              defaultValue={userData?.name}
-              name="artifact_name"
-              type="text"
-              className="input"
-              placeholder="Artifact Name"
-              readOnly
-            /> */}
+            {/* Description - full width */}
+            <div className="flex flex-col">
+              <label htmlFor="short_description" className="label">
+                Description
+              </label>
+              <textarea
+                id="short_description"
+                name="short_description"
+                className="textarea"
+                placeholder="Short description"
+                rows={3}
+              />
+            </div>
+          </div>
 
-            {/* Artifact adder email */}
-            <label className="label">Email</label>
-            <input
-              defaultValue={user.email}
-              name="artifact_email"
-              type="email"
-              className="input"
-              placeholder="Artifact adder email"
-              readOnly
-            />
-
-            <button type="submit" className="btn mt-4">
+          {/* Submit Button - full width */}
+          <div className="mt-8">
+            <button type="submit" className="btn btn-primary py-3 text-lg font-semibold w-fit">
               Submit
             </button>
-          </form>
-        </div>
-      </div>
+          </div>
+        </form>
+      </section>
     </>
   );
 };

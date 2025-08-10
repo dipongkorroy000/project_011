@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        hydrateFallbackElement: <span className="loading loading-ring loading-xl mx-auto"></span>,
+        hydrateFallbackElement: <div className="w-fit mx-auto my-10"><span className="loading loading-bars loading-xs"></span></div>,
         path: "/allArtifact",
         element: <AllArtifacts></AllArtifacts>,
       },
@@ -110,6 +110,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/artifactDetails/:id",
+        loader: ({ params }) => fetch(`https://assignment-011-server-side.vercel.app/artifact/${params.id}`),
+        hydrateFallbackElement: <div className="w-fit mx-auto my-10"><span className="loading loading-bars loading-xs"></span></div>,
         Component: ArtifactDetails,
       },
     ],
