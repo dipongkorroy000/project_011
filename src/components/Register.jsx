@@ -4,8 +4,10 @@ import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 
 const Register = () => {
+  const [image, setImage] = useState(null);
   const { signUp } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -14,10 +16,9 @@ const Register = () => {
 
     const name = e.target.name.value;
     const email = e.target.email.value;
-    const photo = e.target.photo.value;
     const pass = e.target.password.value;
 
-    if (!name || !email || !photo || !pass) {
+    if (!name || !email || !pass) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -30,7 +31,7 @@ const Register = () => {
     const data = Object.fromEntries(formData.entries());
 
     const { password, ...userData } = data;
-    const newUserData = { ...userData };
+    const newUserData = { ...userData, image };
 
     signUp(email, password)
       .then((res) => {
@@ -55,6 +56,25 @@ const Register = () => {
       .catch((error) => console.log(error));
   };
 
+  const imageHandle = async (e) => {
+    const image = e.target.files[0];
+
+    const imageUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(imageUrl, formData);
+      const uploadedImageUrl = await response.data.data.url;
+      setImage(uploadedImageUrl);
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
+
+  };
+
+
   return (
     <>
       <Helmet>
@@ -67,8 +87,12 @@ const Register = () => {
             <label className="label">Name</label>
             <input type="text" name="name" className="input" placeholder="Enter Your Name" />
 
-            <label className="label">Photo</label>
-            <input type="url" name="photo" className="input" placeholder="Enter Photo URL" />
+            <label className="label">Image</label>
+            <input
+              type="file"
+              onChange={(e) => imageHandle(e)}
+              className="py-2 rounded input"
+            />
 
             <label className="label">Email</label>
             <input type="email" name="email" className="input" placeholder="Email" />
@@ -89,7 +113,7 @@ const Register = () => {
           </form>
           <h2>
             Already have an account ?
-            <Link className="text-blue-500" to="/login">
+            <Link className="text-blue-500 hover:underline" to="/login">
               {" "}
               LogIn
             </Link>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import User from "./log/User";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
@@ -8,7 +8,6 @@ import { MdOutlineDarkMode } from "react-icons/md";
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
-    const navigate = useNavigate();
 
   // Detect system theme on first load OR use saved theme
   useEffect(() => {
@@ -45,7 +44,7 @@ const Navbar = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-
+ 
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-base-100 shadow-md">
@@ -70,29 +69,21 @@ const Navbar = () => {
             <div className="drawer-side">
               <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
               <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                <li>
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/allArtifact">All Artifacts</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/addArtifact">Add Artifacts</NavLink>
-                </li>
+                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink to="/allArtifact">All Artifacts</NavLink></li>
+                <li><NavLink to="/addArtifact">Add Artifacts</NavLink></li>
               </ul>
             </div>
           </div>
 
-          <span className="btn btn-ghost text-xl" onClick={navigate("/")}>
-            Historical Artifacts
-          </span>
+          <span className="btn btn-ghost text-xl">Historical Artifacts</span>
         </div>
 
         {/* Right side: theme toggle + user */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-2">
           {/* Theme toggle button */}
           <span className="cursor-pointer" onClick={toggleTheme}>
-            {theme === "light" ? <MdOutlineDarkMode size={26} /> : <CiLight size={26} />}
+            {theme === "light" ? <MdOutlineDarkMode /> : <CiLight />}
           </span>
 
           {!user ? (

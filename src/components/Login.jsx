@@ -95,8 +95,8 @@ const Login = () => {
 
           <h2>
             New to{" "}
-            <Link className="text-blue-500 underline" to="/register">
-              Signup
+            <Link className="text-blue-500 hover:underline" to="/register">
+               Signup
             </Link>
           </h2>
         </div>
