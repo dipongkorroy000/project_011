@@ -23,7 +23,7 @@ const Home = () => {
               <Typewriter
                 loop={Infinity}
                 cursor
-                words={["Provident cupiditate voluptatem"]}
+                words={["Artifacts Histories", "Discover stories behind the world","Every place tells a story"]}
                 cursorStyle="_"
                 typeSpeed={70}
                 deleteSpeed={60}
@@ -31,8 +31,7 @@ const Home = () => {
               />
             </div>
             <p className="mb-5 text-white font-semibold text-lg max-md:text-sm max-md:mx-10">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In
-              deleniti eaque aut repudiandae et a id nisi.
+              Discover stories behind the world’s most thought-provoking landmarks.Where history meets philosophy—share what matters to you.
             </p>
           </div>
         </div>
